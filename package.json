@@ -2,9 +2,9 @@
   "name"               : "server-chat",
   "version"            : "1.0.0",
   "description"        : "",
-  "main"               : "index.ts",
+  "main"               : "server.ts",
   "scripts": {
-    "start"            : "nodemon index.ts",
+    "start"            : "nodemon server.ts",
     "test"             : "echo \"Error: no test specified\" && exit 1"
   },
   "keywords"           : [],
@@ -12,6 +12,7 @@
   "license"            : "ISC",
   "dependencies": {
     "cors"             : "^2.8.5",
+    "dotenv"           : "^16.0.1",
     "express"          : "^4.18.1",
     "nodemon"          : "^2.0.16",
     "typescript"       : "^4.6.4",
