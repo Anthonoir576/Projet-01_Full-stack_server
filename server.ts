@@ -1,7 +1,6 @@
 
 // ------ IMPORT ------
-import express  from 'express';
-import http     from 'http';
+import http from 'http';
 
 require('dotenv').config({ path: './src/config/.env' });
 // --------------------
@@ -9,15 +8,18 @@ require('dotenv').config({ path: './src/config/.env' });
 
 
 // ------ VARIABLE ------
-const socketio  = require('socket.io');
-const app       = express();
-const server    = http.createServer(app);
-const io        = socketio(server);
-const PORT      = process.env.PORT || 5000;
+const application  = require('./app');
+const server       = http.createServer(application);
+const socketio     = require('socket.io');
+const io           = socketio(server);
+const PORT         = process.env.PORT || 5000; 
+const PORT_DEFAULT = process.env.PORT_DEFAULT || 5000; 
 // ---------------------
 
 
 
 // ------ LANCEMENT SERVEUR ------
-server.listen(PORT, () => console.log(`le serveur démarre sur le port ${PORT}`));
+server.listen(PORT || PORT_DEFAULT,
+    () => console.log(`le serveur démarre sur le port ${PORT || PORT_DEFAULT}`)
+);
 // -------------------------------  
