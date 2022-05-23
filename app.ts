@@ -1,7 +1,7 @@
 
 // ------ IMPORT ------
 import express            from 'express';
-import { corsControls }   from "./src/config/cors";
+import { corsOptions }    from "./src/config/cors";
 // --------------------
 
 
@@ -15,7 +15,7 @@ const router  = require('./src/routes/router');
 
 
 // ------ ROUTES ------
-app.use(cors(corsControls));
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
