@@ -12,8 +12,9 @@ const router = express.Router();
 
 
 // ------ ROUTES ------
-router.get('/', (req? :any, res? :any, next? :any) => {
-    res.send('le serveur fonctionne correctement :D');
+router.get('/', (request? :any, response? :any, next? :any) => {
+    response.send('le serveur fonctionne correctement :D');
+
 });
 // --------------------
 
