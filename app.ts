@@ -21,3 +21,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/', router);
 // --------------------
+
+
+
+// ------ EXPORT ------
+module.exports = app;
+// --------------------
