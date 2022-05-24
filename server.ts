@@ -17,8 +17,12 @@ const PORT_DEFAULT = process.env.PORT_DEFAULT || 5000;
 // ---------------------
 
 
-
+  
 // ------ LANCEMENT SERVEUR ------
+application.set('port',
+ process.env.PORT || process.env.PORT_DEFAULT
+);  
+
 io.on('connection', (socket? :any) => {
 
     console.log('Connection d\'un utilisateur !');
