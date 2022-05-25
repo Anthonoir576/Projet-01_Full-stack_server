@@ -3,7 +3,7 @@ require('dotenv').config({ path: './.env' });
 
 
 export const corsOptions: any = {
-    origin             : 'http://localhost:3000/Projet-01_Full-stack_client',
+    'Access-Control-Allow-Origin': ['http://localhost:3000/Projet-01_Full-stack_client', 'http://localhost:3000'],
     credentials        : true,
     // allowedHeaders: ["monHeader"],
     // 'allowedHeaders'   : ['sessionId', 'Content-Type', 'Origin', 'X-Requested-With', 'X-Auth-Token', 'Content', 'Accept', 'Authorization' ],
