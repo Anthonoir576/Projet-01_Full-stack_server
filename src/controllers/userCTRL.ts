@@ -2,7 +2,7 @@ const users :any = [];
 
 
 
-const addUser = ({id, name, room} :any) => {
+const addUser        = ({id, name, room} :any) => {
 
     name = name.trim().toLowerCase();
     room = room.trim().toLowerCase();
@@ -22,23 +22,21 @@ const addUser = ({id, name, room} :any) => {
     return { user };
 };
 
-const removeUser = (id :number) => {
+const removeUser     = (id? :any) => {
     const index = users.findIndex((user? :any) => user.id === id);
 
-    
+    if (index !== -1) {
+        return users.splice(index, 1)[0];
+    };
 };
 
-
-
-
-
-
-const getUser = () => {
-
+const getUser        = (id? :any) => {
+    users.find((user? :any) => user.id === id);
 };
 
-
-const getUsersInRoom = () => {
-
+const getUsersInRoom = (room? :any) => {
+    users.filter((user? :any) => {
+        user.room === room;
+    });
 };
 
