@@ -25,9 +25,7 @@ application.set('port',
 );  
 
 io.on('connect', (socket? :any) => {
-
     console.log('Connection d\'un utilisateur !');
-
     socket.on('disconnect', () => {
         console.log('Déconnection d\'un utilisateur !');
     });
