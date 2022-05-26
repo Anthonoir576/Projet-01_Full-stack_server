@@ -13,7 +13,7 @@ const url           = [`${process.env.URL}`];
 const application   = require('./app');       
 const server        = http.createServer(application);
 const socketio      = require('socket.io');
-const io            = socketio(server, { cors:{ origin: `*` }, Credential: true}); //${url}
+const io            = socketio(server, { cors:{ origin: `${url}`, Credential: true } } ); //${url}
 const PORT          = process.env.PORT || 5000; 
 const PORT_DEFAULT  = process.env.PORT_DEFAULT || 5000;
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./src/controllers/userCTRL'); 
@@ -26,7 +26,7 @@ application.set('port',
  process.env.PORT || process.env.PORT_DEFAULT
 );  
 
-io.on('connection', (socket? :any) => {
+io.on('connect', (socket? :any) => {
 
     socket.on('join', ({ name, room } :any, callback? :any) => {
 
@@ -43,8 +43,8 @@ io.on('connection', (socket? :any) => {
 
     socket.on('sendMessage', (message? :any, callback? :any) => {
         const user = getUser(socket.id);
-        
-        io.to(user.room).emit('message', { user : user.name, text: message });
+
+        io.to(user.room).emit('message', { user: user.name, text: message });
 
         callback();
     });
