@@ -27,8 +27,16 @@ application.set('port',
 io.on('connection', (socket? :any) => {
     console.log('Connection d\'un utilisateur !');
 
-    socket.on('join', ({ name, room } :any) => {
+    socket.on('join', ({ name, room } :any, callback :any) => {
         console.log(name, room);
+
+        const error = true;
+
+        // if (error) {
+        //     callback({ error: 'error' });
+        // };
+
+        
     });
 
     socket.on('disconnect', () => {
