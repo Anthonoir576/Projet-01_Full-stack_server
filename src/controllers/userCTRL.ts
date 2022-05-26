@@ -2,7 +2,7 @@ const users :any = [];
 
 
 
-const addUser        = ({id, name, room} :any) => {
+exports.addUser        = ({id, name, room} :any) => {
 
     name = name.trim().toLowerCase();
     room = room.trim().toLowerCase();
@@ -20,7 +20,7 @@ const addUser        = ({id, name, room} :any) => {
     return { user };
 };
 
-const removeUser     = (id? :any) => {
+exports.removeUser     = (id? :any) => {
     const index = users.findIndex((user? :any) => user.id === id);
 
     if (index !== -1) {
@@ -28,14 +28,13 @@ const removeUser     = (id? :any) => {
     };
 };
 
-const getUser        = (id? :any) => {
+exports.getUser        = (id? :any) => {
     users.find((user? :any) => user.id === id);
 };
 
-const getUsersInRoom = (room? :any) => {
+exports.getUsersInRoom = (room? :any) => {
     users.filter((user? :any) => user.room === room );
 };
 
 
 
-module.exports = { addUser, removeUser, getUser, getUsersInRoom };
