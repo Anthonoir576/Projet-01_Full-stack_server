@@ -42,6 +42,16 @@ io.on('connection', (socket? :any) => {
         socket.emit('message', {user: 'admin', text: `${user.name}, bienvenue dans le salon : ${user.room}`});
         socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name}, a rejoint le salon !`});
         socket.join(user.room);
+
+        callback();
+    });
+
+    socket.on('sendMessage', (message :any, callback :any) => {
+        const user = getUser(socket.id);
+        
+        io.to(user.room).emit('message', { user : user.name, text: message });
+
+        callback();
     });
 
     socket.on('disconnect', () => {
