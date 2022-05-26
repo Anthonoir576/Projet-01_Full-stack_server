@@ -13,7 +13,7 @@ const url           = [`${process.env.URL}`];
 const application   = require('./app');       
 const server        = http.createServer(application);
 const socketio      = require('socket.io');
-const io            = socketio(server, { cors:{ origin: `${url}` }, Credential: true});
+const io            = socketio(server, { cors:{ origin: `*` }, Credential: true}); //${url}
 const PORT          = process.env.PORT || 5000; 
 const PORT_DEFAULT  = process.env.PORT_DEFAULT || 5000;
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./src/controllers/userCTRL'); 
@@ -27,16 +27,11 @@ application.set('port',
 );  
 
 io.on('connection', (socket? :any) => {
-    // ---- test -----
-    console.log('Connection d\'un utilisateur !');
 
-    socket.on('join', ({ name, room } :any, callback :any) => {
-        // ---- test -----
-        console.log(name, room);
+    socket.on('join', ({ name, room } :any, callback? :any) => {
 
         const { error, user } = addUser({ id: socket.id, name: name, room: room });  
-        
-        
+                
         if (error) return callback(error);
 
         socket.emit('message', {user: 'admin', text: `${user.name}, bienvenue dans le salon : ${user.room}`});
@@ -46,7 +41,7 @@ io.on('connection', (socket? :any) => {
         callback();
     });
 
-    socket.on('sendMessage', (message :any, callback :any) => {
+    socket.on('sendMessage', (message? :any, callback? :any) => {
         const user = getUser(socket.id);
         
         io.to(user.room).emit('message', { user : user.name, text: message });

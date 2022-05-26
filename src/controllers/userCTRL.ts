@@ -8,12 +8,10 @@ const addUser        = ({id, name, room} :any) => {
     room = room.trim().toLowerCase();
 
 
-    const existingUser = users.find((user? :any) => user.room === room && user.name === name );
+    const existingUser = users.find((user? :any) => user.room === room && user.name === name);
 
-
-    if (existingUser) {
-        return { error: 'Utilisateur déjà existant !' };
-    };
+    if(!name || !room) return { error: 'Un nom et un salon sont obligatoire !' };
+    if(existingUser) return { error: "L'utilisateur est déjà présent !" };
 
     const user = { id: id, name: name, room: room };
 
