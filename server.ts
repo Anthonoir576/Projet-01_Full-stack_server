@@ -23,7 +23,7 @@ application.set('port',
  process.env.PORT || process.env.PORT_DEFAULT
 );  
 
-io.on('connection', (socket? :any) => {
+io.on('connect', (socket? :any) => {
 
     console.log('Connection d\'un utilisateur !');
 

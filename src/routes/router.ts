@@ -13,8 +13,7 @@ const router = express.Router();
 
 // ------ ROUTES ------
 router.get('/', (request? :any, response? :any, next? :any) => {
-    response.send('le serveur fonctionne correctement :D');
-
+    response.send('le serveur fonctionne correctement :D').status(200);
 });
 // --------------------
 
