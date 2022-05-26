@@ -8,13 +8,13 @@ require('dotenv').config({ path: './src/config/.env' });
 
 
 // ------ VARIABLE ------
-const url          = ['http://localhost:3000'];
-const application  = require('./app');       
-const server       = http.createServer(application);
-const socketio     = require('socket.io');
-const io           = socketio(server, { cors:{ origin: `${url}` }, Credential: true});
-const PORT         = process.env.PORT || 5000; 
-const PORT_DEFAULT = process.env.PORT_DEFAULT || 5000; 
+const url           = ['http://localhost:3000'];
+const application   = require('./app');       
+const server        = http.createServer(application);
+const socketio      = require('socket.io');
+const io            = socketio(server, { cors:{ origin: `${url}` }, Credential: true});
+const PORT          = process.env.PORT || 5000; 
+const PORT_DEFAULT  = process.env.PORT_DEFAULT || 5000; 
 // ---------------------
 
 
