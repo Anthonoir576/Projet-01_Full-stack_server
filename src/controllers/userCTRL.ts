@@ -8,9 +8,7 @@ const addUser = ({id, name, room} :any) => {
     room = room.trim().toLowerCase();
 
 
-    const existingUser = users.find((user? :any) => {
-        user.room === room && user.name === name
-    });
+    const existingUser = users.find((user? :any) => user.room === room && user.name === name );
 
 
     if (existingUser) {
@@ -25,6 +23,8 @@ const addUser = ({id, name, room} :any) => {
 };
 
 const removeUser = (id :number) => {
+    const index = users.findIndex((user? :any) => user.id === id);
+
     
 };
 
