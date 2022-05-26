@@ -8,7 +8,7 @@ require('dotenv').config({ path: './src/config/.env' });
 
 
 // ------ VARIABLE ------
-const url           = ['http://localhost:3000'];
+const url           = [`${process.env.URL}`];
 const application   = require('./app');       
 const server        = http.createServer(application);
 const socketio      = require('socket.io');
