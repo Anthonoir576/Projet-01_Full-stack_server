@@ -2,7 +2,8 @@
 // ------ IMPORT ------
 import http from 'http';
 
-require('dotenv').config({ path: './src/config/.env' });
+require('dotenv')
+    .config({ path: './src/config/.env' });
 // --------------------
 
 
@@ -26,18 +27,21 @@ application.set('port',
 );  
 
 io.on('connection', (socket? :any) => {
+    // ---- test -----
     console.log('Connection d\'un utilisateur !');
 
     socket.on('join', ({ name, room } :any, callback :any) => {
+        // ---- test -----
         console.log(name, room);
 
-        // const error = true;
-
-        // if (error) {
-        //     callback({ error: 'error' });
-        // };
-
+        const { error, user } = addUser({ id: socket.id, name: name, room: room });  
         
+        
+        if (error) return callback(error);
+
+        socket.emit('message', {user: 'admin', text: `${user.name}, bienvenue dans le salon : ${user.room}`});
+        socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name}, a rejoint le salon !`});
+        socket.join(user.room);
     });
 
     socket.on('disconnect', () => {
