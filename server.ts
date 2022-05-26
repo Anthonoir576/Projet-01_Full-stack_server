@@ -30,7 +30,7 @@ io.on('connection', (socket? :any) => {
     socket.on('join', ({ name, room } :any, callback :any) => {
         console.log(name, room);
 
-        const error = true;
+        // const error = true;
 
         // if (error) {
         //     callback({ error: 'error' });
