@@ -24,8 +24,13 @@ application.set('port',
  process.env.PORT || process.env.PORT_DEFAULT
 );  
 
-io.on('connect', (socket? :any) => {
+io.on('connection', (socket? :any) => {
     console.log('Connection d\'un utilisateur !');
+
+    socket.on('join', ({ name, room } :any) => {
+        console.log(name, room);
+    });
+
     socket.on('disconnect', () => {
         console.log('Déconnection d\'un utilisateur !');
     });
