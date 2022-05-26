@@ -35,8 +35,6 @@ const getUser        = (id? :any) => {
 };
 
 const getUsersInRoom = (room? :any) => {
-    users.filter((user? :any) => {
-        user.room === room;
-    });
+    users.filter((user? :any) => user.room === room );
 };
 
