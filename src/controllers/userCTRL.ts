@@ -38,3 +38,6 @@ const getUsersInRoom = (room? :any) => {
     users.filter((user? :any) => user.room === room );
 };
 
+
+
+module.exports = { addUser, removeUser, getUser, getUsersInRoom };
