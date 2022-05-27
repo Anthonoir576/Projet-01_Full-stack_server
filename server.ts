@@ -1,31 +1,36 @@
 
 // ------ IMPORT ------
-import http from 'http';
+const http      = require('http');
+const express   = require('express');
+const socketio  = require('socket.io');
+const cors      = require('cors');
+
+const { addUser,
+        removeUser,
+        getUser,
+        getUsersInRoom }
+                = require('./src/controllers/userCTRL'); 
 
 require('dotenv')
     .config({ path: './src/config/.env' });
+
+const routes    = require('./src/routes/router');
+const app       = express();
 // --------------------
 
 
 
-// ------ VARIABLE ------
-const url           = [`${process.env.URL}`];
-const application   = require('./app');       
-const server        = http.createServer(application);
-const socketio      = require('socket.io');
-const io            = socketio(server); //${url}
+// ------ VARIABLE ------   
+const server        = http.createServer(app);
+const io            = socketio(server);
 const PORT          = process.env.PORT || 5000; 
 const PORT_DEFAULT  = process.env.PORT_DEFAULT || 5000;
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./src/controllers/userCTRL'); 
 // ---------------------
 
-
+app.use(cors());
+app.use(routes);
   
 // ------ LANCEMENT SERVEUR ------
-application.set('port',
- process.env.PORT || process.env.PORT_DEFAULT
-);  
-
 io.on('connect', (socket? :any) => {
 
     socket.on('join', ({ name, room } :any, callback? :any) => {
@@ -34,9 +39,11 @@ io.on('connect', (socket? :any) => {
                 
         if (error) return callback(error);
 
+        socket.join(user.room);
+
         socket.emit('message', {user: 'admin', text: `${user.name}, bienvenue dans le salon : ${user.room}`});
         socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name}, a rejoint le salon !`});
-        socket.join(user.room);
+        
 
         callback();
     });
@@ -50,7 +57,12 @@ io.on('connect', (socket? :any) => {
     });
 
     socket.on('disconnect', () => {
-        console.log('Déconnection d\'un utilisateur !');
+        const user = removeUser(socket.id);
+
+        if (user) {
+            io.to(user.room).emit('message', { user: 'Admin', text: `${user.name}a quitté le salon !` });
+            io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
+        };
     });
     
 });

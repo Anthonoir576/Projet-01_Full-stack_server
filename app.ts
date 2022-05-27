@@ -1,6 +1,5 @@
 
 // ------ IMPORT ------
-import express            from 'express';
 import { corsOptions }    from "./src/config/cors";
 // --------------------
 

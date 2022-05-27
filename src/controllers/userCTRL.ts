@@ -13,7 +13,7 @@ exports.addUser        = ({id, name, room} :any) => {
     if(!name || !room) return { error: 'Un nom et un salon sont obligatoire !' };
     if(existingUser) return { error: "L'utilisateur est déjà présent !" };
 
-    const user = { id: id, name: name, room: room };
+    const user = { id, name, room };
 
     users.push(user);
 
@@ -23,18 +23,12 @@ exports.addUser        = ({id, name, room} :any) => {
 exports.removeUser     = (id? :any) => {
     const index = users.findIndex((user? :any) => user.id === id);
 
-    if (index !== -1) {
-        return users.splice(index, 1)[0];
-    };
+    if(index !== -1) return users.splice(index, 1)[0];
 };
 
-exports.getUser        = (id? :any) => {
-    users.find((user? :any) => user.id === id);
-};
+exports.getUser        = (id? :any) => users.find((user :any) => user.id === id);
 
-exports.getUsersInRoom = (room? :any) => {
-    users.filter((user? :any) => user.room === room );
-};
+exports.getUsersInRoom = (room? :any) => users.filter((user :any) => user.room === room);
 
 
 

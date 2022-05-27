@@ -1,19 +1,19 @@
 
 // ------ IMPORT ------
-const express = require("express");
+const Express = require("express");
 // --------------------
 
 
 
 // ------ VARIABLE ------
-const router = express.Router();
+const router = Express.Router();
 // ----------------------
 
 
 
 // ------ ROUTES ------
-router.get('/', (request? :any, response? :any) => {
-    response.send({response: 'le serveur démarre'}).status(200);
+router.get("/", (request? :any, response? :any) => {
+    response.send({response: 'le serveur démarre !'}).status(200);
 });
 // --------------------
 
