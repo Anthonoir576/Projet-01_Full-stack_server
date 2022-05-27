@@ -1,12 +1,12 @@
 
 // ------ IMPORT ------
-const Express = require("express");
+const ex = require("express");
 // --------------------
 
 
 
 // ------ VARIABLE ------
-const router = Express.Router();
+const router = ex.Router();
 // ----------------------
 
 

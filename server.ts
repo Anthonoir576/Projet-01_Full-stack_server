@@ -48,13 +48,13 @@ io.on('connect', (socket? :any) => {
         callback();
     });
 
-    socket.on('sendMessage', (message? :any, callback? :any) => {
+    socket.on('sendMessage', (message :any, callback :any) => {
         const user = getUser(socket.id);
-
+    
         io.to(user.room).emit('message', { user: user.name, text: message });
-
+    
         callback();
-    });
+      });
 
     socket.on('disconnect', () => {
         const user = removeUser(socket.id);
