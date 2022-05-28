@@ -1,35 +1,25 @@
 
 // ------ IMPORT ------
-const http      = require('http');
-const express   = require('express');
-const socketio  = require('socket.io');
-const cors      = require('cors');
+require('dotenv').config({ path: './src/config/.env' });
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./src/controllers/userCTRL'); 
 
-const { addUser,
-        removeUser,
-        getUser,
-        getUsersInRoom }
-                = require('./src/controllers/userCTRL'); 
-
-require('dotenv')
-    .config({ path: './src/config/.env' });
-
-const routes    = require('./src/routes/router');
-const app       = express();
+const http          = require('http');
+const express       = require('express');
+const socketio      = require('socket.io');
+const cors          = require('cors');
+const PORT          = process.env.PORT || 5000; 
+const PORT_DEFAULT  = process.env.PORT_DEFAULT || 5000;
+const routes        = require('./src/routes/router');
+const app           = express();
+const server        = http.createServer(app);
+const io            = socketio(server);
 // --------------------
 
 
-
-// ------ VARIABLE ------   
-const server        = http.createServer(app);
-const io            = socketio(server);
-const PORT          = process.env.PORT || 5000; 
-const PORT_DEFAULT  = process.env.PORT_DEFAULT || 5000;
-// ---------------------
-
 app.use(cors());
-app.use(routes);
-  
+app.use('/', routes);
+
+
 // ------ LANCEMENT SERVEUR ------
 io.on('connect', (socket? :any) => {
 
