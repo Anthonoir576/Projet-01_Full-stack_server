@@ -21,7 +21,7 @@ app.use('/', routes);
 
 
 // ------ LANCEMENT SERVEUR ------
-io.on('connect', (socket? :any) => {
+io.on('connection', (socket? :any) => {
 
     socket.on('join', ({ name, room } :any, callback? :any) => {
 
