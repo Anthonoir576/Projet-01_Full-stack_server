@@ -16,8 +16,9 @@ const io            = socketio(server);
 // --------------------
 
 
-app.use(cors());
+
 app.use('/', routes);
+app.use(cors());
 
 
 // ------ LANCEMENT SERVEUR ------
