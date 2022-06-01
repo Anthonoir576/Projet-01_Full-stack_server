@@ -22,9 +22,9 @@ app.use(routes);
 
 
 // ------ LANCEMENT SERVEUR ------
-io.on('connect', (socket? :any) => {
+io.on('connect', (socket) => {
 
-    socket.on('join', ({ name, room } :any, callback? :any) => {
+    socket.on('join', ({ name, room }, callback) => {
 
         const { error, user } = addUser({ id: socket.id, name: name, room: room });  
                 
@@ -41,7 +41,7 @@ io.on('connect', (socket? :any) => {
         callback();
     });
 
-    socket.on('sendMessage', (message :any, callback :any) => {
+    socket.on('sendMessage', (message, callback) => {
         const user = getUser(socket.id);
     
         io.to(user.room).emit('message', { user: user.name, text: message });
