@@ -12,7 +12,7 @@ const router = ex.Router();
 
 
 // ------ ROUTES ------
-router.get('/', (request, response) => {
+router.get('/', (request? :any, response? :any) => {
     response.send({response: 'le serveur démarre !'}).status(200);
 });
 // --------------------
